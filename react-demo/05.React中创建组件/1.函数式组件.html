@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+
+<body>
+  <div id="test"></div>
+  <script src="../js/react.development.js"></script>
+  <script src="../js/react-dom.development.js"></script>
+  <!-- babel.js用于将jsx转换成js -->
+  <script src="../js/babel.min.js"></script>
+  <script type="text/babel">
+
+    //console.log("this1的指向:" + this);
+    //自定义函数式组件 首字母需要大写需要符合jsx规范 
+    function Demo() {
+      //这里的this对象为什么是指向windows的?
+      console.log(this);
+      return <h2>创建函数式组件</h2>;
+    }
+
+
+    ReactDOM.render(<Demo />, document.getElementById("test"));
+  </script>
+</body>
+
+</html>

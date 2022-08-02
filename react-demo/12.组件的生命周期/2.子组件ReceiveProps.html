@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+
+<body>
+  <div id="test"></div>
+  <script src="../js/react.development.js"></script>
+  <script src="../js/react-dom.development.js"></script>
+  <!-- babel.js用于将jsx转换成js -->
+  <script src="../js/babel.min.js"></script>
+  <script src="../js/prop-types.js"></script>
+  <script type="text/babel">
+    class A extends React.Component {
+      //初始化状态
+      state = { carName: "奔驰" };
+
+      changeCar = () => {
+        const { carName } = this.state.carName;
+        this.setState({
+          carName: "Telsa"
+        })
+      }
+
+      render() {
+        return (
+          <div>
+            <h2>我是A组件</h2>
+            <button onClick={this.changeCar}>换车</button>
+            <B carName={this.state.carName} />
+          </div>
+        )
+      }
+    }
+
+    class B extends React.Component {
+
+      //生命周期函数 
+      //componentWillReceiveProps  组件将要接收参数
+      //这里要一个坑是 只有在接收新参数的时候 这个钩子才会执行
+      componentWillReceiveProps() {
+        //这里接收参数的是B子组件，应该写在子组件中
+        console.log("B-----componentWillReceiveProps");
+      }
+
+
+      render() {
+        return (
+          <div>
+            <h2>我是B组件:{this.props.carName}</h2>
+          </div>
+        )
+      }
+    }
+
+    ReactDOM.render(<A />, document.getElementById("test"));
+  </script>
+</body>
+
+</html>

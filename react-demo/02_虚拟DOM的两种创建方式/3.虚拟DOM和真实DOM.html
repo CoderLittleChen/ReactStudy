@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <div id="test"></div>
+    <div id="test1"></div>
+    <script src="../js/react.development.js"></script>
+    <script src="../js/react-dom.development.js"></script>
+    <!-- babel.js用于将jsx转换成js -->
+    <script src="../js/babel.min.js"></script>
+    <script type="text/babel">
+        //区别：
+        //1.虚拟DOM只是Reatc内部在用，无需太多的属性，但是虚拟DOM最后会被转换成真实DOM
+        //2.
+
+        //虚拟DOM
+        const VDom = React.createElement("h1",{id:"cm"},"js创建虚拟DOM测试");
+        //真实DOM
+        const TDom = document.getElementById('test1');
+        console.log("虚拟DOM：" + VDom);
+        console.log("真实DOM：" + TDom);
+        
+        ReactDOM.render(VDom,document.getElementById("test"));
+    </script>
+</body>
+</html>

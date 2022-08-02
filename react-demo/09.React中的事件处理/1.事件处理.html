@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+
+<body>
+  <div id="test"></div>
+  <script src="../js/react.development.js"></script>
+  <script src="../js/react-dom.development.js"></script>
+  <!-- babel.js用于将jsx转换成js -->
+  <script src="../js/babel.min.js"></script>
+  <script src="../js/prop-types.js"></script>
+  <script type="text/babel">
+    /*
+      Tips:
+        (1).通过onXxxx属性指定事件处理函数(注意大小写)
+          a.React中使用的是自定义事件,而不是原生的DOM事件
+          b.React中的事件是通过事件委托的方式处理的(委托给组件最外层的元素)
+        (2).尽量避免使用ref,可以通过event.target得到发生事件的DOM元素对象
+
+    
+    */
+
+
+    class Demo extends React.Component {
+
+      myRef = React.createRef();
+      render() {
+        return (
+          <div>
+            <input ref={this.myRef} type="text" placeholder="点击按钮提示数据" />&nbsp;
+            <button onClick={this.ShowData}>点我提示左侧数据</button>&nbsp;
+            <input onBlur={this.ShowData2} type="text" placeholder="失去焦点提示数据" />
+          </div>
+        )
+      }
+
+      ShowData = () => {
+        alert(this.myRef.current.value);
+      }
+
+      ShowData2 = (event) => {
+        //createRef的调用方式
+        //alert(this.myRef1.current.value);
+
+        //这里的event.target得到是真实的DOM对象 然后根据DOM对象获取value值
+        alert(event.target.value);
+
+      }
+    }
+
+    ReactDOM.render(<Demo />, document.getElementById("test"));
+
+
+  </script>
+</body>
+
+</html>

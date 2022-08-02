@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <style>
+    .box {
+      background-color: skyblue;
+      width: 200px;
+      height: 200px;
+      position: fixed;
+    }
+
+    .box1 {
+      background-color: skyblue;
+      width: 200px;
+      height: 200px;
+      position: fixed;
+      margin-top: 300px;
+    }
+
+    .over {
+      background-color: greenyellow;
+      width: 100px;
+      height: 100px;
+      margin-top: 50px;
+      margin-left: 50px;
+      /* position: relative; */
+    }
+
+    .enter {
+      background-color: greenyellow;
+      width: 100px;
+      height: 100px;
+      margin-top: 50px;
+      margin-left: 50px;
+      /* position: relative; */
+    }
+  </style>
+</head>
+<script type="text/javascript">
+    //absolute:生成绝对定位的元素 相对于除static以外的第一个父元素 并且父元素必须设置positive属性，如果没有就继续向上找 直到Body
+    //          脱离文本流  但是文本流的位置不再存在
+    //relative:参考的自己原来的位置 通过margin来移动位置。脱离正常文本流 但是文本流的位置依然存在
+    //fixed:生成绝对定位的元素 根据浏览器窗口进行定位，元素的位置在屏幕滚动的时候 位置不变
+    //static:默认值 没有定位
+    //inherit:从父元素继承position属性的值
+
+</script>
+
+<body>
+  <div class="box" onmouseover="over()">
+    <div class="over">over</div>
+  </div>
+
+  <div class="box1" onmouseenter="enter()">
+    <span class="enter">enter</span>
+  </div>
+</body>
+
+</html>

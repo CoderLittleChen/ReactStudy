@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+
+<body>
+  <div id="test"></div>
+  <script src="../js/react.development.js"></script>
+  <script src="../js/react-dom.development.js"></script>
+  <!-- babel.js用于将jsx转换成js -->
+  <script src="../js/babel.min.js"></script>
+  <script type="text/babel">
+    const title = "前端JS框架";
+    const arr = ["Angular", "React", "Vue"];
+
+    //这里注意{}中只能些js表达式(如果用变量接收 会有返回值 undefined也算)
+    //数组调用map方法之后返回一个新的数组
+    /*
+      区分js代码和js表达式
+        1.表达式
+          (1).变量a
+          (2).a+b
+          (3).demo()
+          (4).arr.map()
+          (5).function test() {}
+        2.代码
+          (1).if() {}
+          (2).for() {}
+          (3).while() {}
+    */
+    const VDom = (
+      <div>
+        <span>{title}</span>
+        <ul>
+          {
+            arr.map((item, index) => {
+              return <li key={index}>{item}</li>
+            })
+          }
+        </ul>
+      </div>
+    )
+
+    ReactDOM.render(VDom, document.getElementById('test'));
+
+  </script>
+  <h2>
+
+  </h2>
+</body>
+
+</html>

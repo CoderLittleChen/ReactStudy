@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <style>
+    .box {
+      background-color: skyblue;
+      width: 300px;
+      height: 300px;
+      position: fixed;
+    }
+
+    .secondBox {
+      background-color: cyan;
+      width: 200px;
+      height: 200px;
+      margin-top: 50px;
+      margin-left: 50px;
+      position: fixed;
+    }
+
+    .thirdBox {
+      background-color: greenyellow;
+      width: 100px;
+      height: 100px;
+      margin-top: 50px;
+      margin-left: 50px;
+      /* position: relative; */
+    }
+
+    .box1 {
+      background-color: skyblue;
+      width: 200px;
+      height: 200px;
+      position: fixed;
+      margin-top: 300px;
+    }
+
+    .scondBox1 {
+      background-color: greenyellow;
+      width: 100px;
+      height: 100px;
+      margin-top: 50px;
+      margin-left: 50px;
+      /* position: relative; */
+    }
+  </style>
+</head>
+
+<body>
+  <script type="text/javascript">
+    //MouseOver:如果绑定了mouseOver事件的元素存在子元素，那么每次移入该元素都会触发一次事件(包括从外部移入或从子元素移入)
+    //MouseEnter:只有鼠标移入事件所绑定的元素 才会触发该事件
+    //MouseOut:
+    //MouseLeave:
+    function over(params) {
+      console.log("over");
+    }
+
+    function enter(params) {
+      console.log("enter");
+    }
+
+    function out(params) {
+      console.log("out");
+    }
+
+    function leave(params) {
+      console.log("leave");
+    }
+
+
+
+  </script>
+
+  <div class="box">
+    <div class="secondBox" onmouseover="over()">
+      <div class="thirdBox">
+        over
+      </div>
+    </div>
+  </div>
+
+  <!-- <div class="box">
+    <div class="secondBox" onmouseover="enter()">
+      <div class="thirdBox">
+        enter
+      </div>
+    </div>
+  </div> -->
+
+  <!-- <div class="box1" onmouseenter="out()">
+    <div class="subBox1">out</div>
+  </div>
+
+  <div class="box1" onmouseenter="leave()">
+    <div class="subBox1">leave</div>
+  </div> -->
+
+
+</body>
+
+</html>

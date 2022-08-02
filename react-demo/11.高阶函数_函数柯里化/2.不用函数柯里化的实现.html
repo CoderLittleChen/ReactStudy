@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+
+<body>
+  <div id="test"></div>
+  <script src="../js/react.development.js"></script>
+  <script src="../js/react-dom.development.js"></script>
+  <!-- babel.js用于将jsx转换成js -->
+  <script src="../js/babel.min.js"></script>
+  <script src="../js/prop-types.js"></script>
+  <script type="text/babel">
+    /*
+      Tip:
+        高阶函数：接收的参数是函数或者返回值是函数
+        函数的柯里化：通过函数调用继续返回函数的方式，实现多次接收参数 最后统一处理的函数编码形式
+    */
+    class Login extends React.Component {
+      //初始化state
+      state = { username: "", password: "" }
+
+      render() {
+        return (
+          <form>
+            用户名：<input onChange={event => this.saveFormData('username', event)} type="text" name="username" />
+            密码：<input onChange={event => this.saveFormData('password', event)} type="text" name="password" />
+            <button onClick={this.handleSubmit}>登录</button>
+          </form>
+        )
+      }
+
+      // saveUserName = (event) => {
+      //   this.setState({
+      //     username: event.target.value
+      //   })
+      // }
+
+      // savePassword = (event) => {
+      //   this.setState({
+      //     password: event.target.value
+      //   })
+      // }
+
+      // saveFormData = (dataType) => {
+      //   return (event) => {
+      //     this.setState({
+      //       [dataType]: event.target.value
+      //     })
+      //   }
+      // }
+
+      saveFormData = (dataType, event) => {
+        this.setState({
+          [dataType]: event.target.value
+        })
+      }
+
+      handleSubmit = (event) => {
+        //阻止事件冒泡 可以取消form表单的提交事件
+        event.preventDefault();
+        //受控组件获取值
+        // alert(`用户名:${this.username.value},密码:${this.password.value}`);
+
+        //通过state来获取值
+        const { username, password } = this.state;
+        alert(`用户名:${username},密码:${password}`);
+      }
+    }
+
+
+    ReactDOM.render(<Login />, document.getElementById("test"))
+
+  </script>
+</body>
+
+</html>

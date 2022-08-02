@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+
+<body>
+  <div id="test"></div>
+  <script src="../js/react.development.js"></script>
+  <script src="../js/react-dom.development.js"></script>
+  <!-- babel.js用于将jsx转换成js -->
+  <script src="../js/babel.min.js"></script>
+  <script type="text/babel">
+    class Weather extends React.Component {
+      /*
+        TODO:
+        //1.初始化State
+        //2.给<h2>元素设置点击事件
+
+        Tips:
+        1.添加点击事件 在js中是onclick，在jsx中是onClick，注意大小写的区别
+        2.如果直接在onClick中调用this，这里是直接通过prototype来调用，而非通过实例来调用 就会导致this对线丢失
+        防止函数中this丢失的解决方法
+        1.使用bind方法将原型链上的方法中this修改,然后用实例自身的方法来接收
+      
+      */
+
+      //构造器函数调用1次
+      constructor(props) {
+        //调用super()必须放在第一行来调用
+        super();
+        this.state = {
+          isHot: false
+        }
+        this.Demo = this.test.bind(this);
+      }
+
+
+      //调用1+n次。n指的是state每一次改变都会调用render函数来重新渲染页面元素
+      render() {
+        //render中的this就是组件实例对象
+        //console.log(this);
+        const { isHot } = this.state;
+        return (
+          <h2 onClick={this.Demo}>今天天气很{isHot ? "炎热" : "凉爽"}</h2>
+        )
+      }
+
+      test() {
+        //console.log(this);
+        const { isHot } = this.state;
+        //这里注意setState，注意这里的method方法采用驼峰命名法
+        //setState 这里的更新是合并  未涉及到的 保持不变
+        this.setState({ isHot: !isHot });
+      }
+    }
+
+    ReactDOM.render(<Weather />, document.getElementById("test"));
+
+    //这里注意点击函数要位于类组件的外侧
+    function ChangeWeather() {
+      //console.log("标题被点击了");
+      //this.SetState(){ isHot = !isHot };
+    }
+
+  </script>
+</body>
+
+</html>

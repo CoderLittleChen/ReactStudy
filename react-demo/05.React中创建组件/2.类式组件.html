@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+
+<body>
+  <div id="test"></div>
+  <script src="../js/react.development.js"></script>
+  <script src="../js/react-dom.development.js"></script>
+  <!-- babel.js用于将jsx转换成js -->
+  <script src="../js/babel.min.js"></script>
+  <script type="text/babel">
+    //创建类式组件
+    class Demo extends React.Component {
+      //render函数是保存在组件对象的prototype上的
+      //在浏览器的Console中输入Demo.prototype即可查看
+      //
+      render() {
+        console.log(this);
+        return (
+          <h2>创建类式组件</h2>
+        )
+      }
+    }
+    ReactDOM.render(<Demo />, document.getElementById("test"));
+  </script>
+</body>
+
+</html>

@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <style>
+    .title {
+      color: cyan
+    }
+  </style>
+</head>
+
+<body>
+  <div id="test"></div>
+  <div id="test1"></div>
+  <script src="../js/react.development.js"></script>
+  <script src="../js/react-dom.development.js"></script>
+  <!-- babel.js用于将jsx转换成js -->
+  <script src="../js/babel.min.js"></script>
+  <script type="text/babel">
+    /*
+        jsx语法规则：
+            1.定义虚拟DOM时，不需要引号
+            2.标签中混入js表达式时要用{}
+            3.样式的类名指定不要用class,改成className
+            4.内联样式要用style={{color:orangle,fontSize:"30px"}}
+                注意在style中多个单词组成的复杂样式 需要用小驼峰命名写法
+            5.jsx中必须只有一个根标签
+            6.标签必须闭合
+            7.标签首字母  
+                (1).若小写字母开头，则将标签转换成html中的同名元素，若html中没有该元素，则报错
+                (2).若大写字母开头，react会视为自定义组件，然后渲染到页面上，如果为定义 则报错
+    */
+
+    const myId = "cm";
+    const myData = "alex";
+
+    //虚拟DOM
+    const VDom = (
+      <div>
+        <span>
+          <h1 className="title" id={myId.toLowerCase()}>
+            <span style={{ color: "red", fontSize: "30px" }}>
+              {myData.toUpperCase()}
+            </span>
+          </h1>
+        </span>
+        <input type="text" name="" id="" />
+        <Good>123</Good>
+      </div>
+    )
+    ReactDOM.render(VDom, document.getElementById("test"));
+  </script>
+</body>
+
+</html>

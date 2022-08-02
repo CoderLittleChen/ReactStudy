@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <style>
+    .list {
+      height: 150px;
+      width: 210px;
+      background-color: skyblue;
+      overflow: auto;
+    }
+
+    .news {
+      height: 30px;
+    }
+  </style>
+</head>
+
+<body>
+  <div id="test"></div>
+  <script src="../js/react.development.js"></script>
+  <script src="../js/react-dom.development.js"></script>
+  <script src="../js/babel.min.js"></script>
+  <script src="../js/prop-types.js"></script>
+  <script type="text/babel">
+    class News extends React.Component {
+      /*
+        Tips:
+        1.scrollHeight  当前内容区的高度
+        2.scorllTop 向上滚动的高度
+      */
+
+
+      //初始化状态
+      state = { newArr: [] };
+
+      componentDidMount() {
+        setInterval(() => {
+          const { newArr } = this.state;
+          //模拟一条新闻
+          const news = "新闻" + (newArr.length + 1);
+          this.setState({
+            newArr: [news, ...newArr]
+          })
+        }, 1000);
+        //console.log(newArr);
+      }
+
+      getSnapshotBeforeUpdate() {
+        //将当前list区域的高度作为快照返回
+        return this.refs.list.scrollHeight;
+      }
+
+      //把快照传给DidUpdate
+      //三个参数 之前的props  之前的state snapshot
+      componentDidUpdate(preProps, preState, height) {
+        this.refs.list.scrollTop += this.refs.list.scrollHeight - height;
+      }
+
+
+
+      render() {
+        const { newArr } = this.state;
+        return (
+          <div className="list" ref="list">
+            {
+              newArr.map((n, index) => {
+                return <div key={index} className="news">{n}</div>
+              })
+            }
+          </div>
+        )
+      }
+    }
+
+    ReactDOM.render(<News />, document.getElementById("test"));
+
+  </script>
+</body>
+
+</html>

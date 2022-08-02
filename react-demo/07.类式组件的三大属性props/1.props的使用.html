@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+
+<body>
+  <div id="test"></div>
+  <script src="../js/react.development.js"></script>
+  <script src="../js/react-dom.development.js"></script>
+  <!-- babel.js用于将jsx转换成js -->
+  <script src="../js/babel.min.js"></script>
+  <script type="text/babel">
+    class Person extends React.Component {
+      //构造函数不是必须的 可以直接在外部对state进行初始化 
+
+      state = { name: "cm", age: 17 };
+
+      //this中的三大常用属性 state porps context
+      //如何接收在render中组件的props?
+      //props = this.state.props;
+
+      render() {
+        return (
+          <ul>
+            <li>姓名:{this.props.name}</li>
+            <li>年龄:{this.props.age}</li>
+          </ul>
+        )
+      }
+    }
+
+    //这里可以使用...解构赋值来批量传递props
+    ReactDOM.render(<Person name="cm" age="18" />, document.getElementById("test"));
+
+  </script>
+</body>
+
+</html>

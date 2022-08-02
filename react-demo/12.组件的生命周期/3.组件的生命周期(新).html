@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+
+<body>
+  <div id="test"></div>
+  <script src="../js/18.1/react.development.js"></script>
+  <script src="../js/18.1/react-dom.development.js"></script>
+  <!-- babel.js用于将jsx转换成js -->
+  <script src="../js/babel.min.js"></script>
+  <script src="../js/prop-types.js"></script>
+  <script type="text/babel">
+
+    /*
+      Tips:
+       在React 18.x版本 有三个钩子函数前缀需要加上UNSAFE(注意全是大写)
+       1.UNSAFE_componentWillMount
+       2.UNSAFE_componentWillUpdate
+       3.UNSAFE_componnetWillReveiveProps
+    */
+
+    class Count extends React.Component {
+      constructor(props) {
+        console.log("Count----constructor");
+        super(props);
+        //初始化state
+        this.state = { count: 0 }
+      }
+
+
+      //组件卸载
+      death = () => {
+        ReactDOM.unmountComponentAtNode(document.getElementById("test"));
+      }
+
+
+      //强制更新
+      force = () => {
+        this.forceUpdate();
+      }
+
+      //getDerivedStateFromProps 保证state的值在任何时候都取决于props
+      static getDerivedStateFromProps(props) {
+        console.log("Count----getDerivedStateFromProps");
+        //return props;
+        return { count: 100 };
+      }
+
+      getSnapshotBeforeUpdate() {
+        console.log("getSnapshotBeforeUpdate");
+        return "cm";
+      }
+
+      //组件将要挂载
+      // UNSAFE_componentWillMount() {
+      //   console.log("Count----componentWillMount");
+      // }
+
+      //组件挂载完毕
+      componentDidMount() {
+        console.log("Count----componentDidMount");
+      }
+
+      //组件将要卸载
+      componentWillUnmount() {
+        console.log("Count----componentWillUnMount");
+      }
+
+
+      //控制组件更新的阀门  其返回值决定是否继续执行render等后续操作
+      //但是forceUpdate(不对状态进行修改  只是单纯的更新)不受这个的控制
+      shouldComponentUpdate() {
+        console.log("Count----shouldComponentUpdate");
+        return true;
+      }
+
+      //组件将要更新
+      // UNSAFE_componentWillUpdate() {
+      //   console.log("Count----componentWillUpdate");
+      // }
+
+      //组件更新完成
+      componentDidUpdate(preProps, preState, snapshotValue) {
+        console.log("Count----componentDidUpdate", preProps, preSTate, snapshotValue);
+      }
+
+
+      //点击 计数+1
+      Add = () => {
+        const { count } = this.state;
+        this.setState({
+          count: count + 1
+        })
+      }
+
+
+      //组件渲染
+      render() {
+        console.log("Count----render");
+        const { count } = this.state;
+        return (
+          <div>
+            <h2>当前值：{count}</h2>
+            <button onClick={this.Add}>点击+1</button>
+            <button onClick={this.death}>卸载组件</button>
+            <button onClick={this.force}>强制更新</button>
+          </div>
+        )
+      }
+    }
+
+    class A extends React.Component {
+      //初始化状态
+      state = { carName: "奔驰" };
+
+      changeCar = () => {
+        const { carName } = this.state.carName;
+        this.setState({
+          carName: "Telsa"
+        })
+      }
+
+      render() {
+        return (
+          <div>
+            <h2>我是A组件</h2>
+            <button onClick={this.changeCar}>换车</button>
+            <B carName={this.state.carName} />
+          </div>
+        )
+      }
+    }
+
+    class B extends React.Component {
+
+      //生命周期函数 
+      //componentWillReceiveProps  组件将要接收参数
+      //这里要一个坑是 只有在接收新参数的时候 这个钩子才会执行
+      componentWillReceiveProps() {
+        //这里接收参数的是B子组件，应该写在子组件中
+        console.log("B-----componentWillReceiveProps");
+      }
+
+
+      render() {
+        return (
+          <div>
+            <h2>我是B组件:{this.props.carName}</h2>
+          </div>
+        )
+      }
+    }
+
+    const root = ReactDOM.createRoot(document.getElementById("test"));
+    root.render(<Count />);
+  </script>
+</body>
+
+</html>

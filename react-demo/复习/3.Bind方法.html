@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+
+<body>
+  <script type="text/javascript">
+    function demo() {
+      console.log(this);
+    }
+
+    demo();
+    //bind方法会返回一个新函数 需要变量接收来调用
+    //新函数被调用 他的this值是传递给bind()函数的第一个参数
+    const a = demo.bind({ a: 1, b: 2 });
+    a();
+
+  </script>
+</body>
+
+</html>

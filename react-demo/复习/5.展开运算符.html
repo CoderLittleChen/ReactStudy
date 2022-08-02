@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+
+<body>
+  <script type="text/javascript">
+    /*
+      Tips:
+      1.展开运算符不能展开对象
+      2.
+    
+    */
+
+    let arr1 = [1, 2, 3];
+    let arr2 = [6, 7, 8, 9];
+    //展开数组
+    console.log(...arr1);
+
+    //连接两个数组
+    let arr3 = [...arr1, ...arr2];
+    console.log(arr3);
+
+    let person1 = { name: "cm", age: 12 };
+    console.log("---person1------");
+    //原生的es规范不允许解构赋值对象  但是在react中配合babel就是可以的 仅限于传参
+    console.log(...person1);
+    // {...} 表示复制一个对象  效果类似深Copy,复制之后 修改属性值不会改变原来对象的值
+    let person2 = { ...person1 };
+    //赋值之后修改属性 不会影响原对象属性 深Copy
+    person2.name = "cmm";
+    console.log("person1的name属性:" + person1.name);
+    console.log("person2的name属性:" + person2.name);
+
+    console.log("----------------------");
+
+    function sum(...numbers) {
+      //reduce将数组求和的值进行返回
+      return numbers.reduce((preValue, currentValue) => {
+        return preValue + currentValue;
+      });
+    }
+
+    //这里不能直接传数组 是为什么？
+    console.log(sum(1, 2, 3));
+
+  </script>
+</body>
+
+</html>
